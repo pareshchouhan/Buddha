@@ -1,0 +1,13 @@
+{
+    "syntaxVersion": 3,
+    "projectPackageId": "com.quotenspire.buddha",
+    "authority": "com.quotenspire.buddha.provider",
+    "providerJavaPackage": "com.quotenspire.buddha.provider",
+    "providerClassName": "QuoteProvider",
+    "sqliteOpenHelperClassName": "QuoteSQLiteHelper",
+    "sqliteOpenHelperCallbacksClassName": "QuoteSQLiteHelperCallbacks",
+    "databaseFileName": "quotenspire.db",
+    "databaseVersion": 1,
+    "enableForeignKeys": false,
+    "useAnnotations": true
+}

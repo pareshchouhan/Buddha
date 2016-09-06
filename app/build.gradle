@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.1"
+    defaultConfig {
+        applicationId "com.quotenspire.buddha"
+        minSdkVersion 14
+        targetSdkVersion 24
+        versionCode 21
+        versionName "1.20"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+
+        all {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors  {
+        free {
+            applicationId "com.quotenspire.buddha.free"
+        }
+
+        paid {
+            applicationId "com.quotenspire.buddha.paid"
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:design:24.2.0'
+    compile 'com.android.support:support-v4:24.2.0'
+    freeCompile 'com.google.firebase:firebase-ads:9.4.0'
+    freeCompile 'com.google.firebase:firebase-core:9.4.0'
+//    compile 'com.android.support:support-vector-drawable:24.2.0'
+//    compile 'com.android.support:animated-vector-drawable:24.2.0'
+    compile 'ch.acra:acra:4.9.0'
+    testCompile 'junit:junit:4.12'
+
+    compile 'com.tsengvn:typekit:1.0.1'
+    compile 'com.github.marcoscgdev.EasyLicensesDialog:appcompatversion:1.0.4'
+
+//    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
+//    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+//    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+}
+
+apply plugin: 'com.google.gms.google-services'

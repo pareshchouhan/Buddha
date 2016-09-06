@@ -1,0 +1,25 @@
+{
+    "documentation": "quotes.",
+    "fields": [
+        {
+            "documentation": "Uid",
+            "name" : "uid",
+            "type" : "Integer",
+            "nullable" : false
+        },
+        {
+            "documentation": "Quote",
+            "name": "quote",
+            "type": "String",
+            "nullable": false,
+            "defaultValue": ""
+        }
+    ],
+    
+    "constraints": [
+        {
+            "name": "unique_quote",
+            "definition": "UNIQUE (quote) ON CONFLICT REPLACE"
+        }
+    ]
+}

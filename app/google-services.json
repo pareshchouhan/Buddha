@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "746474790452",
+    "firebase_url": "https://buddha-d998d.firebaseio.com",
+    "project_id": "buddha-d998d",
+    "storage_bucket": "buddha-d998d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746474790452:android:60908aa3f7c5c678",
+        "android_client_info": {
+          "package_name": "com.quotenspire.buddha.free"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "746474790452-dnpn8sh79k7c5bib6aph435qn4qfn395.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDstzcqhg-eVCePXupgV5QsoDBHu2Vx0QE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746474790452:android:685f14094db494c6",
+        "android_client_info": {
+          "package_name": "com.quotenspire.buddha.paid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "746474790452-dnpn8sh79k7c5bib6aph435qn4qfn395.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDstzcqhg-eVCePXupgV5QsoDBHu2Vx0QE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
