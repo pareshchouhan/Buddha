@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -48,7 +49,7 @@ import java.util.Calendar;
 
 public class QuoteNSpireActivity extends AppCompatActivity {
 
-    View mContentView;
+    RelativeLayout mContentView;
 
     private TextView quoteText;
     private RelativeLayout quoteBubble;
@@ -68,6 +69,8 @@ public class QuoteNSpireActivity extends AppCompatActivity {
     int previousQuid = -1;
     int currentPos;
 
+    final String AD_TEST_ID = "61A935F0FF283916D2372533249F4E56";
+
     MediaPlayer mediaPlayer;
     int QUOTE_COUNT = 0;
 
@@ -86,8 +89,22 @@ public class QuoteNSpireActivity extends AppCompatActivity {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         MobileAds.initialize(getApplicationContext(), getString(R.string.ad_app_id));
 
-        mContentView = findViewById(R.id.fullscreen_content);
-        adView = (AdView) findViewById(R.id.adView);
+        mContentView = (RelativeLayout) findViewById(R.id.fullscreen_content);
+
+        //Setup ad view
+        adView = (AdView) new AdView(this);
+        adView.setAdUnitId(getString(R.string.banner_quotenspire_ad_unit_id));
+        adView.setAdSize(AdSize.BANNER);
+
+        RelativeLayout.LayoutParams adParams =
+                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT);
+        adParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        adParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+
+        mContentView.addView(adView, adParams);
+
+        //get reference to all the views.
         previousImage = (ImageView) findViewById(R.id.previous);
         shareImage = (ImageView) findViewById(R.id.share);
         aboutImage = (ImageView) findViewById(R.id.about);
@@ -115,12 +132,12 @@ public class QuoteNSpireActivity extends AppCompatActivity {
         quoteBubble.setVisibility(View.INVISIBLE);
 
         int uid = getIntent().getIntExtra(getString(R.string.uid), -1);
-
+        //If user clicks on notification redirect them to that quote :)
         if (uid != -1) {
             String quote = fetchQuote(uid, false);
             animateBubble(quote);
         }
-
+        //Setup alarms for our lovely notification
         SharedPreferences sharedPrefs = getSharedPreferences(getString(R.string.app_name),
                 Context.MODE_PRIVATE);
         //If this is first run of device set an Alarm Manager to fire Notification at 6:00 AM.
@@ -135,6 +152,7 @@ public class QuoteNSpireActivity extends AppCompatActivity {
             time.set(Calendar.MINUTE, 0);
             time.set(Calendar.SECOND, 0);
             time.set(Calendar.MILLISECOND, 0);
+            //Hack to get the Notification from next day instead of notifications firing instantly.
             if (Calendar.getInstance().after(time)) {
                 time.add(Calendar.DATE, 1);
             }
@@ -173,7 +191,9 @@ public class QuoteNSpireActivity extends AppCompatActivity {
             }
         });
 
+        //Generate Ad
         AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AD_TEST_ID)
                 .build();
         adView.loadAd(adRequest);
 
@@ -185,6 +205,10 @@ public class QuoteNSpireActivity extends AppCompatActivity {
         setupListeners();
     }
 
+    /**
+     * setupListeners
+     * Used to setup On Click Listeners
+     */
     private void setupListeners() {
         aboutImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -263,6 +287,11 @@ public class QuoteNSpireActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * animateBubble
+     * Runs a animation to bring the quote buubble to center with the specified quote.
+     * @param quote
+     */
     private void animateBubble(String quote) {
         quoteText.setText("");
 
@@ -286,6 +315,11 @@ public class QuoteNSpireActivity extends AppCompatActivity {
         quoteBubble.startAnimation(animationFadeAndScale);
     }
 
+
+    /**
+     * Slidein Animate the provided view to center
+     * @param view
+     */
     private void animateSlideIn(ImageView view) {
         final Animation translateAnimation = new TranslateAnimation(
                 Animation.RELATIVE_TO_SELF, 0.0f,
@@ -298,6 +332,13 @@ public class QuoteNSpireActivity extends AppCompatActivity {
         view.startAnimation(translateAnimation);
     }
 
+    /**
+     * fetchQuote
+     * Used to fetch a random (sequential random??) quote or quote specified by uid
+     * @param uid Uid of Quote to fetch
+     * @param isPrevious if we need to save previous quote or not.
+     * @return String Quote that was fetched
+     */
     private String fetchQuote(int uid, boolean isPrevious) {
         if (!isPrevious) {
             currentPos = -1;
@@ -369,6 +410,10 @@ public class QuoteNSpireActivity extends AppCompatActivity {
         hideUI();
     }
 
+    /**
+     * hideUI
+     * used for hiding UI buttons and other UI elements of Android AOSP
+     */
     public void hideUI() {
         mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
@@ -381,9 +426,16 @@ public class QuoteNSpireActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
     }
 
+    /**
+     * scaleView
+     *
+     * @param v
+     * @param startScale
+     * @param endScale
+     */
     public void scaleView(View v, float startScale, float endScale) {
         Animation anim = new ScaleAnimation(
-                1f, 1f, // Start and end values for the X axis scaling
+                    1f, 1f, // Start and end values for the X axis scaling
                 startScale, endScale, // Start and end values for the Y axis scaling
                 Animation.RELATIVE_TO_SELF, 0f, // Pivot point of X scaling
                 Animation.RELATIVE_TO_SELF, 1f); // Pivot point of Y scaling
@@ -393,6 +445,12 @@ public class QuoteNSpireActivity extends AppCompatActivity {
 
 
     //Source : http://stackoverflow.com/questions/20991764/how-to-programatically-animate-an-imageview
+
+    /**
+     * getAnimator
+     * Shrink grow animation
+     * @return AnimationSet returns a Grow and Shrink animation set.
+     */
     public AnimationSet getAnimator() {
         final float growTo = 1.1f;
         final long duration = 300;
@@ -413,6 +471,10 @@ public class QuoteNSpireActivity extends AppCompatActivity {
         return growAndShrink;
     }
 
+    /**
+     * addToDb
+     * adds quotes to DB, called on first run of the Application.
+     */
     private void addToDb() {
         final Context context = getApplicationContext();
         final SharedPreferences sharedPrefs = context.getSharedPreferences(getString(R.string
@@ -446,6 +508,10 @@ public class QuoteNSpireActivity extends AppCompatActivity {
         }).start();
     }
 
+    /**
+     * resetDb
+     * resets DB in case we got a DB upgrade.
+     */
     private void resetDb() {
         new Thread(new Runnable() {
             @Override
@@ -459,6 +525,10 @@ public class QuoteNSpireActivity extends AppCompatActivity {
         }).start();
     }
 
+    /**
+     * saveScreenShot
+     * Removes UI elements (Icons/Other things) and captures Screenshot.
+     */
     private void saveScreenShot() {
         View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
         boolean isPreviousVisible = false;
@@ -474,7 +544,7 @@ public class QuoteNSpireActivity extends AppCompatActivity {
         adView.setVisibility(View.INVISIBLE);
         audioStatusImage.setVisibility(View.INVISIBLE);
         Bitmap bm = getScreenShot(rootView);
-        storeScreenshot(bm);
+        storeScreenShot(bm);
         shareImage();
         if (isPreviousVisible) {
 //            previousImage.setVisibility(View.VISIBLE);
@@ -485,10 +555,17 @@ public class QuoteNSpireActivity extends AppCompatActivity {
         adView.setVisibility(View.VISIBLE);
         audioStatusImage.setVisibility(View.VISIBLE);
         AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AD_TEST_ID)
                 .build();
         adView.loadAd(adRequest);
     }
 
+    /**
+     * getScreenShot
+     * get Screenshot from the view.
+     * @param view
+     * @return Bitmap returns bitmap image of the ScreenShot.
+     */
     private Bitmap getScreenShot(View view) {
         View screenView = view.getRootView();
         screenView.setDrawingCacheEnabled(true);
@@ -497,7 +574,12 @@ public class QuoteNSpireActivity extends AppCompatActivity {
         return bitmap;
     }
 
-    private void storeScreenshot(Bitmap bm) {
+    /**
+     * storeScreenshot
+     * stores ScreenShot temporarily for sharing.
+     * @param bm Bitmap image of screenshot.
+     */
+    private void storeScreenShot(Bitmap bm) {
         File cachePath = new File(QuoteNSpireActivity.this.getCacheDir(), "images");
         cachePath.mkdirs(); // don't forget to make the directory
         try {
@@ -512,6 +594,11 @@ public class QuoteNSpireActivity extends AppCompatActivity {
         }
     }
 
+
+    /**
+     * shareImage
+     * Calls ShareImage Intent for easy sharing of images. :)
+     */
     private void shareImage() {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
