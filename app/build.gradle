@@ -29,11 +29,15 @@ android {
 
     productFlavors  {
         free {
+            versionCode 27
             applicationId "com.quotenspire.buddha.free"
+            versionName "1.26 Free"
         }
 
         paid {
+            versionCode 26
             applicationId "com.quotenspire.buddha.paid"
+            versionName "1.25 Paid"
         }
     }
 }

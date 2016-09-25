@@ -121,7 +121,6 @@ public class QuoteNSpireActivity extends AppCompatActivity {
 
         mediaPlayer = MediaPlayer.create(this, R.raw.bell);
 
-
         //add to DB
         addToDb();
 
@@ -193,7 +192,6 @@ public class QuoteNSpireActivity extends AppCompatActivity {
 
         //Generate Ad
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AD_TEST_ID)
                 .build();
         adView.loadAd(adRequest);
 
@@ -555,8 +553,9 @@ public class QuoteNSpireActivity extends AppCompatActivity {
         adView.setVisibility(View.VISIBLE);
         audioStatusImage.setVisibility(View.VISIBLE);
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AD_TEST_ID)
                 .build();
+//        .addTestDevice(AD_TEST_ID)
+//                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
         adView.loadAd(adRequest);
     }
 

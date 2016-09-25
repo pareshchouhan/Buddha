@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
@@ -99,14 +100,21 @@ public class QuoteNotificationReciever extends BroadcastReceiver {
         Bitmap largeIcon = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap
                 .ic_launcher);
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        Notification.Builder builder =
-                new Notification.Builder(getContext())
+        NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(getContext())
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setAutoCancel(true)
                         .setSound(alarmSound)
                         .setLargeIcon(largeIcon)
                         .setContentTitle("QuoteNSpire")
                         .setContentText(quote);
+
+        NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
+        bigTextStyle.setBigContentTitle("Quote \"N\" Spire");
+        bigTextStyle.setSummaryText("Quote of the day");
+        bigTextStyle.bigText(quote);
+        builder.setStyle(bigTextStyle);
+
         Intent launchAppIntent = new Intent(getContext(), QuoteNSpireActivity.class);
         launchAppIntent.putExtra(getContext().getString(R.string.uid), uid);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(getContext());
