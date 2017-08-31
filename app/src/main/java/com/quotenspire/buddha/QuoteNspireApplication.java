@@ -5,32 +5,32 @@ import android.content.Context;
 
 import com.tsengvn.typekit.Typekit;
 
-import org.acra.ACRA;
-import org.acra.ReportingInteractionMode;
-import org.acra.annotation.ReportsCrashes;
-import org.acra.sender.HttpSender;
+//import org.acra.ACRA;
+//import org.acra.ReportingInteractionMode;
+//import org.acra.annotation.ReportsCrashes;
+//import org.acra.sender.HttpSender;
 
 /**
  * Created by Paresh on 7/23/2016.
  */
 
 
-@ReportsCrashes(
-        httpMethod = HttpSender.Method.PUT,
-        reportType = HttpSender.Type.JSON,
-        formUri = "http://reporting.futuretraxex.com/acra-quotenspire/_design/acra-storage/_update/report",
-        formUriBasicAuthLogin = "buddha",
-        formUriBasicAuthPassword = "vye5tAcCGp4r9V6Z8EvB",
-        resToastText = R.string.crash,
-        mode = ReportingInteractionMode.DIALOG,
-        resDialogText = R.string.crash_dialog_text,
-        resDialogIcon = android.R.drawable.ic_dialog_info, //optional. default is a warning sign
-        resDialogTitle = R.string.crash_dialog_title, // optional. default is your application name
-        resDialogCommentPrompt = R.string.crash_dialog_comment_prompt, // optional. When defined, adds a user text field input with this text resource as a label
-        resDialogOkToast = R.string.crash_dialog_ok_toast, // optional. displays a Toast message
-        // when the user accepts to send a report.
-        resDialogTheme = R.style.AppTheme_Dialog //optional. default is Theme.Dialog
-)
+//@ReportsCrashes(
+//        httpMethod = HttpSender.Method.PUT,
+//        reportType = HttpSender.Type.JSON,
+//        formUri = "http://reporting.futuretraxex.com/acra-quotenspire/_design/acra-storage/_update/report",
+//        formUriBasicAuthLogin = "buddha",
+//        formUriBasicAuthPassword = "vye5tAcCGp4r9V6Z8EvB",
+//        resToastText = R.string.crash,
+//        mode = ReportingInteractionMode.DIALOG,
+//        resDialogText = R.string.crash_dialog_text,
+//        resDialogIcon = android.R.drawable.ic_dialog_info, //optional. default is a warning sign
+//        resDialogTitle = R.string.crash_dialog_title, // optional. default is your application name
+//        resDialogCommentPrompt = R.string.crash_dialog_comment_prompt, // optional. When defined, adds a user text field input with this text resource as a label
+//        resDialogOkToast = R.string.crash_dialog_ok_toast, // optional. displays a Toast message
+//        // when the user accepts to send a report.
+//        resDialogTheme = R.style.AppTheme_Dialog //optional. default is Theme.Dialog
+//)
 public class QuoteNspireApplication extends Application {
     public QuoteNspireApplication() {
         super();
@@ -39,7 +39,7 @@ public class QuoteNspireApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        ACRA.init(this);
+//        ACRA.init(this);
     }
 
     @Override

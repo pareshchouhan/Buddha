@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "com.quotenspire.buddha"
         minSdkVersion 14
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 21
         versionName "1.20"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -29,15 +29,15 @@ android {
 
     productFlavors  {
         free {
-            versionCode 27
+            versionCode 28
             applicationId "com.quotenspire.buddha.free"
-            versionName "1.26 Free"
+            versionName "1.27 Free"
         }
 
         paid {
-            versionCode 26
+            versionCode 27
             applicationId "com.quotenspire.buddha.paid"
-            versionName "1.25 Paid"
+            versionName "1.26 Paid"
         }
     }
 }
@@ -47,14 +47,14 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:24.2.0'
-    compile 'com.android.support:design:24.2.0'
-    compile 'com.android.support:support-v4:24.2.0'
-    freeCompile 'com.google.firebase:firebase-ads:9.4.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    freeCompile 'com.google.android.gms:play-services-ads-lite:11.0.4'
     freeCompile 'com.google.firebase:firebase-core:9.4.0'
 //    compile 'com.android.support:support-vector-drawable:24.2.0'
 //    compile 'com.android.support:animated-vector-drawable:24.2.0'
-    compile 'ch.acra:acra:4.9.0'
+//    compile 'ch.acra:acra:4.9.0'
     testCompile 'junit:junit:4.12'
 
     compile 'com.tsengvn:typekit:1.0.1'
