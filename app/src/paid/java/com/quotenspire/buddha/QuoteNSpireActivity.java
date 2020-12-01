@@ -33,7 +33,7 @@ import com.quotenspire.buddha.Service.QuoteNotificationReciever;
 import com.quotenspire.buddha.provider.quotes.QuotesContentValues;
 import com.quotenspire.buddha.provider.quotes.QuotesCursor;
 import com.quotenspire.buddha.provider.quotes.QuotesSelection;
-import com.tsengvn.typekit.TypekitContextWrapper;
+//import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -64,10 +64,10 @@ public class QuoteNSpireActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
     int QUOTE_COUNT = 0;
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
-    }
+//    @Override
+//    protected void attachBaseContext(Context newBase) {
+////        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 30
+    buildToolsVersion '30.0.2'
     defaultConfig {
         applicationId "com.quotenspire.buddha"
-        minSdkVersion 14
-        targetSdkVersion 25
+        minSdkVersion 16
+        targetSdkVersion 30
         versionCode 21
         versionName "1.20"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -26,39 +26,38 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    flavorDimensions "version"
     productFlavors  {
-        free {
-            versionCode 28
-            applicationId "com.quotenspire.buddha.free"
-            versionName "1.27 Free"
-        }
-
         paid {
             versionCode 27
             applicationId "com.quotenspire.buddha.paid"
             versionName "1.26 Paid"
+            dimension "version"
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:support-v4:25.3.1'
-    freeCompile 'com.google.android.gms:play-services-ads-lite:11.0.4'
-    freeCompile 'com.google.firebase:firebase-core:9.4.0'
+//    def appcompat_version = "1.2.0"
+//    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    // For loading and tinting drawables on older versions of the platform
+//    implementation "androidx.appcompat:appcompat-resources:$appcompat_version"
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:support-compat:28.0.0'
+//    freeCompile 'com.google.android.gms:play-services-ads-lite:11.0.4'
+//    freeCompile 'com.google.firebase:firebase-core:9.4.0'
 //    compile 'com.android.support:support-vector-drawable:24.2.0'
 //    compile 'com.android.support:animated-vector-drawable:24.2.0'
 //    compile 'ch.acra:acra:4.9.0'
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 
-    compile 'com.tsengvn:typekit:1.0.1'
-    compile 'com.github.marcoscgdev.EasyLicensesDialog:appcompatversion:1.0.4'
+//    implementation 'com.tsengvn:typekit:1.0.1'
+    implementation 'com.github.marcoscgdev.EasyLicensesDialog:appcompatversion:1.0.4'
 
 //    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
 //    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'

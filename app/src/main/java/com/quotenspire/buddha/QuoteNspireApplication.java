@@ -3,7 +3,7 @@ package com.quotenspire.buddha;
 import android.app.Application;
 import android.content.Context;
 
-import com.tsengvn.typekit.Typekit;
+//import com.tsengvn.typekit.Typekit;
 
 //import org.acra.ACRA;
 //import org.acra.ReportingInteractionMode;
@@ -60,8 +60,8 @@ public class QuoteNspireApplication extends Application {
 //                    .build());
 //        }
 
-        Typekit.getInstance()
-                .addNormal(Typekit.createFromAsset(this, "Montserrat-Bold.ttf"));
+//        Typekit.getInstance()
+//                .addNormal(Typekit.createFromAsset(this, "Montserrat-Bold.ttf"));
         super.onCreate();
 
     }
